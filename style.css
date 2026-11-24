@@ -1,0 +1,209 @@
+/* Dynamic Interlude v0.1.6
+ * The open interaction uses SillyTavern's own <dialog>-based Popup system.
+ * This stylesheet only customizes the popup contents, transcript strip, and
+ * minimized body-level recovery button.
+ */
+
+.dynamic-interlude-popup {
+    box-sizing: border-box;
+    width: min(620px, calc(100dvw - 2em));
+}
+
+.dynamic-interlude-popup .popup-body {
+    max-height: calc(100dvh - 1.5em);
+}
+
+.dynamic-interlude-popup .popup-content {
+    overflow-y: auto;
+}
+
+.dynamic-interlude-native-content {
+    outline: none;
+}
+
+.dynamic-interlude-title {
+    font-weight: 800;
+    font-size: 1.15rem;
+    margin-bottom: 2px;
+}
+
+.dynamic-interlude-kicker {
+    opacity: .76;
+    font-size: .9rem;
+    margin-bottom: 12px;
+}
+
+.dynamic-interlude-cue {
+    line-height: 1.45;
+    margin: 10px 0 4px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(127,127,127,.12);
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.dynamic-interlude-popup-input {
+    min-height: 106px;
+    max-height: 32dvh;
+    resize: vertical;
+}
+
+.dynamic-interlude-error {
+    margin-top: 10px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    background: rgba(170, 35, 35, .28);
+    border: 1px solid rgba(255, 90, 90, .38);
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+#dynamic-interlude-reopen {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    transform: translateX(-50%) !important;
+    width: min(340px, calc(100vw - 24px)) !important;
+    width: min(340px, calc(100dvw - 24px)) !important;
+    min-height: 48px !important;
+    padding: 10px 18px !important;
+    border-radius: 999px !important;
+    z-index: 2147483646 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 8px 28px rgba(0,0,0,.42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 800;
+}
+
+#dynamic-interlude-reopen[hidden] {
+    display: none !important;
+}
+
+.dynamic-interlude-composer-locked #send_textarea {
+    opacity: .62;
+    cursor: pointer;
+}
+
+.dynamic-interlude-control-disabled {
+    pointer-events: none !important;
+    opacity: .35 !important;
+}
+
+/* Real micro-turn: a genuine ST user message, displayed as a compact
+ * right-aligned interlude card. The label is CSS-only, so the model-visible
+ * message text remains exactly the player reaction. */
+#chat .mes[type="dynamic_interlude"] {
+    box-sizing: border-box;
+    width: fit-content;
+    max-width: min(82%, 620px);
+    margin: 8px 10px 8px auto;
+    padding: 8px 12px !important;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--SmartThemeQuoteColor) 10%, transparent);
+    text-align: left;
+}
+
+
+#chat .mes[type="dynamic_interlude"] .mesAvatarWrapper,
+#chat .mes[type="dynamic_interlude"] .ch_name,
+#chat .mes[type="dynamic_interlude"] .timestamp,
+#chat .mes[type="dynamic_interlude"] .mesIDDisplay,
+#chat .mes[type="dynamic_interlude"] .extraMesButtons {
+    display: none !important;
+}
+
+#chat .mes[type="dynamic_interlude"] .mes_block {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+}
+
+#chat .mes[type="dynamic_interlude"] .mes_text {
+    padding: 0 !important;
+    text-align: left;
+    white-space: normal;
+}
+
+#chat .mes[type="dynamic_interlude"] .mes_text::before {
+    content: "↪ Interlude · You";
+    display: block;
+    margin-bottom: 4px;
+    font-size: .78em;
+    line-height: 1.2;
+    font-weight: 800;
+    opacity: .72;
+    letter-spacing: .01em;
+}
+
+#chat .mes[type="dynamic_interlude"] .mes_text p:last-child {
+    margin-bottom: 0;
+}
+
+@supports not (background: color-mix(in srgb, black 10%, transparent)) {
+    #chat .mes[type="dynamic_interlude"] {
+        background: rgba(127, 127, 127, .10);
+    }
+}
+
+.dynamic-interlude-settings-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+@media (max-width: 700px), (pointer: coarse) {
+    .dynamic-interlude-popup {
+        box-sizing: border-box;
+        width: calc(100dvw - 16px);
+        max-width: calc(100dvw - 16px);
+        max-height: calc(100dvh - 1em);
+        margin: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .dynamic-interlude-popup .popup-controls {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .dynamic-interlude-popup .popup-controls .menu_button {
+        width: 100%;
+        min-height: 48px;
+        margin: 0;
+    }
+
+    .dynamic-interlude-popup .popup-button-ok {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .dynamic-interlude-popup .popup-button-custom {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .dynamic-interlude-popup .popup-button-cancel {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .dynamic-interlude-popup-input {
+        max-height: 28dvh;
+        resize: none;
+    }
+}

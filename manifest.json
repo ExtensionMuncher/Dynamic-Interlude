@@ -1,0 +1,11 @@
+{
+  "display_name": "Dynamic Interlude",
+  "loading_order": 25,
+  "default_state": "enabled",
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "Reticent Aoi / OpenAI",
+  "version": "0.1.6"
+}
